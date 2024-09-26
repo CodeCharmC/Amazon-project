@@ -50,7 +50,7 @@ products.forEach(product => {
 
             <div class="product-spacer"></div>
 
-            <div class="added-to-cart">
+            <div class="added-to-cart js-added-to-cart-${product.id}">
                <img src="images/icons/checkmark.png">
                Added
             </div>
@@ -94,6 +94,11 @@ products.forEach(product => {
          cart.forEach((item) => {
             cartQuantity += item.quantity;
          });
+
+         document.querySelector(`.js-added-to-cart-${productId}`).classList.add("added-to-cart2");
+         setTimeout(() => { 
+            document.querySelector(`.js-added-to-cart-${productId}`).classList.remove("added-to-cart2");          
+         }, 2000);         
 
          document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
