@@ -69,7 +69,7 @@ products.forEach(product => {
    //Step3: Make the html interactive;
    document.querySelectorAll(".js-add-to-cart-btn").forEach((button) => {
       button.addEventListener("click", () => {
-         const productId = button.dataset.productId;
+         const { productId } = button.dataset;
 
          let matchingItem;
          cart.forEach((item) => {            
