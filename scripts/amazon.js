@@ -34,18 +34,18 @@ products.forEach(product => {
             </div>
 
             <div class="product-quantity-container">
-            <select>
-               <option selected value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-               <option value="4">4</option>
-               <option value="5">5</option>
-               <option value="6">6</option>
-               <option value="7">7</option>
-               <option value="8">8</option>
-               <option value="9">9</option>
-               <option value="10">10</option>
-            </select>
+               <select class="js-product-quantity-${product.id}">
+                  <option selected value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+               </select>
             </div>
 
             <div class="product-spacer"></div>
@@ -78,12 +78,15 @@ products.forEach(product => {
             }
          });
 
+         let selectedProduct = (document.querySelector(`.js-product-quantity-${productId}`));
+         let selectedProductValue = parseInt(selectedProduct.value);
+            
          if (matchingItem) {
-            matchingItem.quantity += 1;
+            matchingItem.quantity += selectedProductValue;
          } else {
             cart.push({
                productId: productId,
-               quantity: 1
+               quantity: selectedProductValue
             });
          };
 
