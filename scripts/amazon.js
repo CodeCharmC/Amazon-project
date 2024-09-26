@@ -72,7 +72,7 @@ products.forEach(product => {
          const { productId } = button.dataset;
 
          let matchingItem;
-         cart.forEach((item) => {            
+         cart.forEach((item) => {
             if (productId === item.productId) {
                matchingItem = item;
             }
@@ -85,7 +85,7 @@ products.forEach(product => {
             matchingItem.quantity += selectedProductValue;
          } else {
             cart.push({
-               productId: productId,
+               productId,
                quantity: selectedProductValue
             });
          };
