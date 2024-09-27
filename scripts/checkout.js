@@ -145,10 +145,20 @@ document.querySelectorAll(".js-update-quantity-link").forEach((link) => {
 document.querySelectorAll(".js-save-quantity").forEach((saveBtn) => { 
    saveBtn.addEventListener("click", () => {
       const productId = saveBtn.dataset.saveCartProductId;
+
       document.querySelector(`.js-cart-item-container-${productId}`).classList.remove("is-editing");
-      let cartQuantity = Number(document.querySelector(`.js-product-quantity-${productId}`).value);
-      updateQuantity(productId, cartQuantity);
-      //console.log(cartQuantity);
+
+      let productQuantityId = document.querySelector(`.js-product-quantity-${productId}`);
+      if (productQuantityId) {
+         const newCartQuantity = Number(productQuantityId.value);
+         
+         updateQuantity(productId, newCartQuantity);
+
+         const cartQuantity = calculateCartQuantity();
+         document.querySelector(".js-return-to-home-link").textContent = `${cartQuantity} items`;    
+         
+         document.querySelector(`.js-cart-item-container-${productId} .quantity-label`).textContent = newCartQuantity;
+      };
    });   
 });
 
