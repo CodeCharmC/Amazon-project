@@ -1,4 +1,4 @@
-import { cart, deleteCartProduct, calculateCartQuantity } from "../data/cart.js";
+import { cart, deleteCartProduct, calculateCartQuantity, addToCart, updateQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formateCurrency } from "./utils/money.js";
 
@@ -37,9 +37,26 @@ cart.forEach((cartItem) => {
                   <span>
                      Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                   </span>
-                  <span class="update-quantity-link link-primary">
+                  <span 
+                     class="update-quantity-link link-primary js-update-quantity-link"
+                     data-update-cart-product-id = "${matchingProduct.id}"
+                  >
                      Update
                   </span>
+
+                  <input
+                     type="number"
+                     class="quantity-input js-product-quantity-${matchingProduct.id}"
+                     value="${cartItem.quantity}"
+                  >
+
+                  <span 
+                     class="save-quantity-link link-primary js-save-quantity"
+                     data-save-cart-product-id = "${matchingProduct.id}"
+                  >
+                     Save
+                  </span>
+
                   <span 
                      class="delete-quantity-link link-primary js-delete-cart-product"
                      data-delete-cart-product-id = "${matchingProduct.id}"
@@ -117,6 +134,23 @@ document.querySelectorAll(".js-delete-cart-product").forEach((link) => {
    });
 });
 
+
+document.querySelectorAll(".js-update-quantity-link").forEach((link) => {
+   link.addEventListener(("click"), () => {
+      const productId = link.dataset.updateCartProductId;
+      document.querySelector(`.js-cart-item-container-${productId}`).classList.add("is-editing");
+   });
+});
+
+document.querySelectorAll(".js-save-quantity").forEach((saveBtn) => { 
+   saveBtn.addEventListener("click", () => {
+      const productId = saveBtn.dataset.saveCartProductId;
+      document.querySelector(`.js-cart-item-container-${productId}`).classList.remove("is-editing");
+      let cartQuantity = Number(document.querySelector(`.js-product-quantity-${productId}`).value);
+      updateQuantity(productId, cartQuantity);
+      //console.log(cartQuantity);
+   });   
+});
 
 let cartQuantity = calculateCartQuantity();
 document.querySelector(".js-return-to-home-link").textContent = `${cartQuantity} items`;
