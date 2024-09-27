@@ -1,12 +1,41 @@
 import { products } from "../data/products.js";
 import { cart } from "../data/cart.js";
 
-//Step1: Collectt the data;
-/**
- const products = []
-*/
+function addedToCartMessage(productId) {
+   document.querySelector(`.js-added-to-cart-${productId}`).classList.add("added-to-cart2");
+   setTimeout(() => { 
+      document.querySelector(`.js-added-to-cart-${productId}`).classList.remove("added-to-cart2");          
+   }, 2000);
+}
 
-//Step2: Genarating HTML; 
+function renderCart() {
+   let cartQuantity = 0;
+   cart.forEach((cartItem) => {
+      cartQuantity += cartItem.quantity;
+   });      
+   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+};
+ 
+function addToCart(productId) {
+   let matchingItem;
+   cart.forEach((cartItem) => {
+      if (productId === cartItem.productId) {
+         matchingItem = cartItem;
+      }
+   });
+
+   let selectedProduct = (document.querySelector(`.js-product-quantity-${productId}`));
+   let selectedProductValue = parseInt(selectedProduct.value);
+      
+   if (matchingItem) {
+      matchingItem.quantity += selectedProductValue;
+   } else {
+      cart.push({
+         productId,
+         quantity: selectedProductValue
+      });
+   };
+};
 let productHtml = "";
 products.forEach(product => {
    productHtml += `
@@ -69,41 +98,13 @@ products.forEach(product => {
    
    document.querySelector(".js-products-grid").innerHTML = productHtml;   
 
-   //Step3: Make the html interactive;
    document.querySelectorAll(".js-add-to-cart-btn").forEach((button) => {
       button.addEventListener("click", () => {
          const { productId } = button.dataset;
 
-         let matchingItem;
-         cart.forEach((item) => {
-            if (productId === item.productId) {
-               matchingItem = item;
-            }
-         });
-
-         let selectedProduct = (document.querySelector(`.js-product-quantity-${productId}`));
-         let selectedProductValue = parseInt(selectedProduct.value);
-            
-         if (matchingItem) {
-            matchingItem.quantity += selectedProductValue;
-         } else {
-            cart.push({
-               productId,
-               quantity: selectedProductValue
-            });
-         };
-
-         let cartQuantity = 0;
-         cart.forEach((item) => {
-            cartQuantity += item.quantity;
-         });
-
-         document.querySelector(`.js-added-to-cart-${productId}`).classList.add("added-to-cart2");
-         setTimeout(() => { 
-            document.querySelector(`.js-added-to-cart-${productId}`).classList.remove("added-to-cart2");          
-         }, 2000);         
-
-         document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+         addToCart(productId);
+         renderCart(); 
+         addedToCartMessage(productId);
 
       });
    });
