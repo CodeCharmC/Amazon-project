@@ -1,3 +1,6 @@
+import { products } from "../data/products.js";
+import { cart } from "../data/cart.js";
+
 //Step1: Collectt the data;
 /**
  const products = []
