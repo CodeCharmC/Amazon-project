@@ -1,5 +1,5 @@
 import { products } from "../data/products.js";
-import { cart, addToCart } from "../data/cart.js";
+import { addToCart, calculateCartQuantity } from "../data/cart.js";
 import { formateCurrency } from "./utils/money.js";
 
 function addedToCartMessage(productId) {
@@ -9,11 +9,12 @@ function addedToCartMessage(productId) {
    }, 2000);
 }
 
-function renderCart() {
-   let cartQuantity = 0;
-   cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-   });      
+setTimeout(() => {
+   renderCart();  
+}, 1000);
+
+function renderCart() { 
+   let cartQuantity = calculateCartQuantity();
    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 };
  
