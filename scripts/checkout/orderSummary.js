@@ -1,29 +1,17 @@
 import { cart, deleteCartProduct, calculateCartQuantity, updateQuantity, updateDeliveryOptions } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { ismatchingProduct } from "../../data/products.js";
 import { formateCurrency } from "../utils/money.js";
-import { deliveryOptions } from "../../data/deliveryOption.js";
+import { isdelivery, deliveryOptions } from "../../data/deliveryOption.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 export function renderOrderSummary() {
    let orderSummaryHtml = "";
    cart.forEach((cartItem) => {
       const productId = cartItem.productId;
-      //de-doublicating data 
-      let matchingProduct;
-      products.forEach((product) => {
-         if (product.id === productId) {
-            matchingProduct = product;
-         }
-      })
+      let matchingProduct = ismatchingProduct(productId);
 
       const deliveryOptionId = cartItem.deliveryOptionsId;
-      let deliveryOption;
-
-      deliveryOptions.forEach((option) => {
-         if (option.id === deliveryOptionId) {
-            deliveryOption = option;
-         };
-      });
+      let deliveryOption = isdelivery(deliveryOptionId);
 
       orderSummaryHtml += `
          <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
