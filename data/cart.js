@@ -1,5 +1,3 @@
-import { renderPaymentSummary } from "../scripts/checkout/paymentSummary.js";
-
 export let cart = JSON.parse(localStorage.getItem("cart")) || [
    {
       productId: "58b4fc92-e98c-42aa-8c55-b6b79996769a",
@@ -38,9 +36,6 @@ export function deleteCartProduct(productId) {
 
    cart = newCart;
    saveToLocalStorage();
-   renderPaymentSummary();
-   let cartQuantity = calculateCartQuantity();
-   document.querySelector(".js-return-to-home-link").textContent = `${cartQuantity} items`;
 };
 
 export function calculateCartQuantity() {
