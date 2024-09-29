@@ -1,3 +1,15 @@
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; 
+
+export function calculateDeliveryDate(deliveryOption) {
+   const today = dayjs();
+   const deliveryDateIndex = today.add(deliveryOption.deliverDays, "day")
+   if (deliveryDateIndex.day() === 0) {      
+      const deliveryDate = deliveryDateIndex.add(1, "day").format("dddd, MMMM D");
+      return deliveryDate;
+   }
+   const deliveryDate = deliveryDateIndex.format("dddd, MMMM D");
+   return deliveryDate;   
+};
 export function isdelivery(deliveryOptionId) {
    let deliveryOption;
 
