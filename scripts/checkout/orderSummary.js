@@ -47,13 +47,14 @@ export function renderOrderSummary() {
 
                      <input
                         type="number"
-                        class="quantity-input js-product-quantity-${matchingProduct.id}"
+                        class="quantity-input js-product-quantity-${matchingProduct.id} js-quantity-input"
                         value="${cartItem.quantity}"
                      >
 
                      <span 
                         class="save-quantity-link link-primary js-save-quantity"
                         data-save-cart-product-id = "${matchingProduct.id}"
+                        tabindex= "0"                        
                      >
                         Save
                      </span>
@@ -150,6 +151,15 @@ export function renderOrderSummary() {
             renderCheckoutHeader();
             renderOrderSummary();
             renderPaymentSummary();
+         };
+      });
+   });
+
+   document.querySelectorAll(`.js-quantity-input`).forEach((input) => {
+      input.addEventListener("keydown", (event) => {
+         if (event.key === "Enter") {
+            event.preventDefault();
+            document.querySelector('.js-save-quantity').click();
          };
       });
    });
