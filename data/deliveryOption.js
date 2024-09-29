@@ -6,6 +6,9 @@ export function calculateDeliveryDate(deliveryOption) {
    if (deliveryDateIndex.day() === 0) {      
       const deliveryDate = deliveryDateIndex.add(1, "day").format("dddd, MMMM D");
       return deliveryDate;
+   } else if (deliveryDateIndex.day() === 6) {
+      const deliveryDate = deliveryDateIndex.add(2, "day").format("dddd, MMMM D");
+      return deliveryDate;
    }
    const deliveryDate = deliveryDateIndex.format("dddd, MMMM D");
    return deliveryDate;   
