@@ -1,6 +1,5 @@
 import { cart, deleteCartProduct, updateQuantity, updateDeliveryOptions } from "../../data/cart.js";
 import { ismatchingProduct } from "../../data/products.js";
-import { formateCurrency } from "../utils/money.js";
 import { isdelivery, deliveryOptions, calculateDeliveryDate } from "../../data/deliveryOption.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";
@@ -31,7 +30,7 @@ export function renderOrderSummary() {
                      ${matchingProduct.name}
                   </div>
                   <div class="product-price">
-                     ${formateCurrency(matchingProduct.priceCents)}
+                     ${matchingProduct.getFormatedPrice()}
                   </div>
                   <div class="product-quantity">
                      <span>
@@ -83,9 +82,9 @@ export function renderOrderSummary() {
       let deliveryOptionsHtml = "";
 
       deliveryOptions.forEach((deliveryOption) => {
-         const price = (deliveryOption.priceCents === 0) ? ("FREE") : (`$${formateCurrency(deliveryOption.priceCents)}`);
+         const price = (deliveryOption.priceCents === 0) ? ("FREE") : (`$deliveryOption.getFormatedPrice()`);
 
-         const isChecked = cartItem.deliveryOptionsId === deliveryOption.id;
+         const isChecked = (cartItem.deliveryOptionsId === deliveryOption.id);
          
          deliveryOptionsHtml +=`
             <div 

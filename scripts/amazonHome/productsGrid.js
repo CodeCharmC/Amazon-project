@@ -1,6 +1,5 @@
 import { products } from "../../data/products.js";
 import { addToCart } from "../../data/cart.js";
-import { formateCurrency } from "../utils/money.js";
 import { renderAmazonHeader } from "./amazonHeader.js";
 
 export function renderProductsGrid() { 
@@ -22,7 +21,7 @@ export function renderProductsGrid() {
             <div class="product-rating-container">
                <img 
                   class="product-rating-stars"
-                  src="images/ratings/rating-${product.rating.stars * 10}.png"
+                  src="${ product.getStarsUrls() }"
                >
                <div class="product-rating-count link-primary">
                   ${product.rating.count}
@@ -30,7 +29,7 @@ export function renderProductsGrid() {
             </div>
 
             <div class="product-price">
-               ${formateCurrency(product.priceCents)}
+               ${product.getFormatedPrice()}
             </div>
 
             <div class="product-quantity-container">
