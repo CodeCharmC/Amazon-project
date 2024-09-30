@@ -151,7 +151,15 @@ export function renderOrderSummary() {
       input.addEventListener("keydown", (event) => {
          if (event.key === "Enter") {
             event.preventDefault();
-            document.querySelector('.js-save-quantity').click();
+
+            // Get the closest cart item container
+            const cartItemContainer = input.closest('.cart-item-container');
+
+            // Find the corresponding save link within the same cart item container
+            const saveLink = cartItemContainer.querySelector(`.js-save-quantity`);
+            if (saveLink) {
+               saveLink.click();
+            };
          };
       });
    });
