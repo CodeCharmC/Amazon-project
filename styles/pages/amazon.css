@@ -165,7 +165,9 @@
   border-radius: 50px;
 }
 
-.size-chart-link {
+.size-chart-link
+.instruction-link
+.warranty-link {
   color: rgb(1, 124, 182);
   cursor: pointer;
   font-size: smaller;
