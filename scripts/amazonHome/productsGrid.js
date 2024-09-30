@@ -69,7 +69,11 @@ export function renderProductsGrid() {
       button.addEventListener("click", () => {
          const { productId } = button.dataset;
 
-         addToCart(productId);
+         let selectedProduct = (document.querySelector(`.js-product-quantity-${productId}`));
+         let productQuantity = parseInt(selectedProduct.value);
+
+         if (productQuantity) addToCart(productId, productQuantity);
+
          renderAmazonHeader();
          addedToCartMessage(productId);
 

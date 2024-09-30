@@ -54,18 +54,15 @@ export function calculateCartQuantity() {
    return cartQuantity;
 };
 
-export function addToCart(productId) {
+export function addToCart(productId, productQuantity) {
    let matchingItem = ismatching(productId);
-
-   let selectedProduct = (document.querySelector(`.js-product-quantity-${productId}`));
-   let selectedProductValue = parseInt(selectedProduct.value);
       
    if (matchingItem) {
-      matchingItem.quantity += selectedProductValue;
+      matchingItem.quantity += productQuantity;
    } else {
       cart.push({
          productId,
-         quantity: selectedProductValue,
+         quantity: productQuantity,
          deliveryOptionsId: "1"
       });
    };
