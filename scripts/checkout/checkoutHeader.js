@@ -18,7 +18,7 @@ export function renderCheckoutHeader() {
                <a class="return-to-home-link js-return-to-home-link"
                   href="amazon.html"
                >
-               ${calculateCartQuantity()}
+               ${calculateCartQuantity()} items
                </a>
             )
          </div>

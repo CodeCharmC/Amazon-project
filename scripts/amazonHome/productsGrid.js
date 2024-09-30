@@ -47,6 +47,8 @@ export function renderProductsGrid() {
                </select>
             </div>
 
+            ${product.extraInfoHtml()}       <!-- polimorfism --> 
+
             <div class="product-spacer"></div>
 
             <div class="added-to-cart js-added-to-cart-${product.id}">
