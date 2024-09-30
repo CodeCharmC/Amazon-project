@@ -72,15 +72,15 @@ export function addToCart(productId) {
    saveToLocalStorage();   
 };
 
-export function updateQuantity(productId, cartQuantity) {
+export function updateQuantity(productId, newcartQuantity) { 
    let matchingItem = ismatching(productId);
    
    if (matchingItem) {
-      matchingItem.quantity = cartQuantity;
+      ((!isNaN(newcartQuantity) && newcartQuantity > 0) ? (matchingItem.quantity = newcartQuantity) : (alert("Enter a valid quantity!")));      
    } else {
       cart.push({
          productId,
-         quantity: cartQuantity,
+         quantity: newcartQuantity,
          deliveryOptionsId: "1"
       });
    };
