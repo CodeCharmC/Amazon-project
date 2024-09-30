@@ -1,17 +1,15 @@
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"; 
+import { formateCurrency } from "../scripts/utils/money.js";
 
 export function calculateDeliveryDate(deliveryOption) {
    const today = dayjs();
-   const deliveryDateIndex = today.add(deliveryOption.deliverDays, "day")
-   if (deliveryDateIndex.day() === 0) {      
-      const deliveryDate = deliveryDateIndex.add(1, "day").format("dddd, MMMM D");
-      return deliveryDate;
-   } else if (deliveryDateIndex.day() === 6) {
-      const deliveryDate = deliveryDateIndex.add(2, "day").format("dddd, MMMM D");
-      return deliveryDate;
-   }
-   const deliveryDate = deliveryDateIndex.format("dddd, MMMM D");
-   return deliveryDate;   
+   const deliveryDates = today.add(deliveryOption.deliverDays, "day")
+
+   if (deliveryDates.day() === 0) {      
+      return deliveryDates.add(1, "day").format("dddd, MMMM D");      
+   } else if (deliveryDates.day() === 6) {
+      return deliveryDates.add(2, "day").format("dddd, MMMM D");
+   } else return deliveryDates.format("dddd, MMMM D");
 };
 export function isdelivery(deliveryOptionId) {
    let deliveryOption;
@@ -23,6 +21,20 @@ export function isdelivery(deliveryOptionId) {
    });
    return deliveryOption || deliveryOptions[0];
 };
+
+class DeliveryOption {
+   id;
+   deliverDays;
+   priceCents;
+   constructor(deliveryOptionDetails) {
+      this.id = deliveryOptionDetails.id;
+      this.deliverDays = deliveryOptionDetails.deliverDays;
+      this.priceCents = deliveryOptionDetails.priceCents;
+   };  
+   getFormatedPrice() { 
+      return `${formateCurrency(this.priceCents)}`
+   };
+}
 
 export const deliveryOptions = [
    {
@@ -40,4 +52,6 @@ export const deliveryOptions = [
       deliverDays: "1",
       priceCents: 999
    }
-];
+].map((deliveryOptionDetails) => {
+   return new DeliveryOption(deliveryOptionDetails);
+});
