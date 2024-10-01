@@ -125,9 +125,16 @@ export function loadProducts(functionCall) {
     functionCall();  
   })
 
+  xhr.addEventListener("error", (error) => {
+    console.log("Error, something went wrong");
+  })
+
   xhr.open("GET", "https://supersimplebackend.dev/products");
+  //xhr.open("GET", "https://e.supersimplebackend.dev/products");
   xhr.send();
 };
+
+//loadProducts();
 
 
 
