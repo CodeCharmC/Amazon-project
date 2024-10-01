@@ -81,7 +81,6 @@ class Appliance extends Product {
   }
 }
 
-/*
 export let products = [];
 
 export function loadProducts(functionCall) {
@@ -96,7 +95,7 @@ export function loadProducts(functionCall) {
       /* Because 'https://supersimplebackend.dev/products' does not contain the products type for appliance
       else if (productDetails.type === "appliance") {
         return new Appliance(productDetails);
-      }    */ /*
+      }    */
 
       return new Product(productDetails);
     });
@@ -106,10 +105,10 @@ export function loadProducts(functionCall) {
   xhr.open("GET", "https://supersimplebackend.dev/products");
   xhr.send();
 };
-*/
 
 
- 
+
+/** 
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -793,3 +792,4 @@ export const products = [
   }
   return new Product(productDetails);
 });
+*/
