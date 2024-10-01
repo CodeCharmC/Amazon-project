@@ -7,21 +7,24 @@ import { loadCarts } from "../data/cart-from-backends.js";
 
 //import "../data/backend-practic.js";
 
-new Promise((resolve) => {
-   console.log("Loading products...");
-   loadProducts(() => {
-      console.log("Products loaded");
-      resolve();
-   })
-}).then(() => {
-   return new Promise((resolve) => {
+
+Promise.all([
+   new Promise((resolve) => {
+      console.log("Loading products...");
+      loadProducts(() => {
+         console.log("Products loaded");
+         resolve("A value");
+      })
+   }),
+   new Promise((resolve) => {
       console.log("Loading carts...");
       loadCarts(() => {
          console.log("Carts loaded");
-         resolve();
-      });
-   });
-}).then(() => {
+         resolve("Another value");
+      }); 
+   })   
+]).then((values) => {
+   console.log(values);
    renderOrderSummary();
    renderPaymentSummary();
    renderCheckoutHeader();
