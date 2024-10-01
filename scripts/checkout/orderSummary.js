@@ -1,5 +1,6 @@
 import { cart, deleteCartProduct, updateQuantity, updateDeliveryOptions } from "../../data/cart.js";
-import { ismatchingProduct } from "../../data/products.js";
+//import { ismatchingProduct } from "../../data/products.js";
+import { ismatchingProduct } from "../../data/products-from-backend.js";
 import { isdelivery, deliveryOptions, calculateDeliveryDate } from "../../data/deliveryOption.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 import { renderCheckoutHeader } from "./checkoutHeader.js";

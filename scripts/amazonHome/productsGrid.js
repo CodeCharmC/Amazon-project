@@ -1,4 +1,5 @@
-import { products } from "../../data/products.js";
+//import { products } from "../../data/products.js";
+import { products } from "../../data/products-from-backend.js";
 import { addToCart } from "../../data/cart.js";
 import { renderAmazonHeader } from "./amazonHeader.js";
 

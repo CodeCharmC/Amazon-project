@@ -1,5 +1,6 @@
 import { cart, calculateCartQuantity } from "../../data/cart.js";
-import { ismatchingProduct } from "../../data/products.js";
+//import { ismatchingProduct } from "../../data/products.js";
+import { ismatchingProduct } from "../../data/products-from-backend.js";
 import { formateCurrency } from "../utils/money.js";
 import { isdelivery } from "../../data/deliveryOption.js";
 
