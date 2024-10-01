@@ -5,9 +5,25 @@ import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 import { loadProducts, loadProductsFetch } from "../data/products-from-backend.js";
 import { loadCarts } from "../data/cart-from-backends.js";
 
-//import "../data/backend-practic.js";
 
 
+async function loadPage() {
+
+   await loadProductsFetch();
+
+   await new Promise((resolve) => {
+      loadCarts(() => {
+         resolve("Another value");
+      });
+   });
+
+   renderOrderSummary();
+   renderPaymentSummary();
+   renderCheckoutHeader();
+};
+loadPage();
+
+/*
 Promise.all([
    loadProductsFetch(),
    new Promise((resolve) => {
@@ -22,7 +38,8 @@ Promise.all([
    renderOrderSummary();
    renderPaymentSummary();
    renderCheckoutHeader();
-});
+});   
+*/
 
 //we use Promise and resolve instead of callback functions because they are easier to read and solve nesting.
 
