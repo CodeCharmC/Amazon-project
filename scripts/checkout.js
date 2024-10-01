@@ -9,14 +9,20 @@ import { loadCarts } from "../data/cart-from-backends.js";
 
 async function loadPage() {
 
-   await loadProductsFetch();
+   try {
+      //throw new Error("Something went wrong");
 
-   await new Promise((resolve) => {
-      loadCarts(() => {
-         resolve("Another value");
+      await loadProductsFetch();
+
+      await new Promise((resolve, reject) => {
+         loadCarts(() => {
+            resolve("Another value");
+            //reject("Something went wrong");
+         });
       });
-   });
-
+   } catch (error) {
+      console.log(error);
+   };
    renderOrderSummary();
    renderPaymentSummary();
    renderCheckoutHeader();
