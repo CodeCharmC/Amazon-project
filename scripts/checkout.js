@@ -3,7 +3,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 //import { loadProducts } from "../data/products.js";
 import { loadProducts, loadProductsFetch } from "../data/products-from-backend.js";
-import { loadCarts } from "../data/cart-from-backends.js";
+import { loadCartFetch, loadCarts } from "../data/cart-from-backends.js";
 
 
 
@@ -14,12 +14,9 @@ async function loadPage() {
 
       await loadProductsFetch();
 
-      await new Promise((resolve, reject) => {
-         loadCarts(() => {
-            resolve("Another value");
-            //reject("Something went wrong");
-         });
-      });
+      await loadCartFetch();
+
+      
    } catch (error) {
       console.log(error);
    };
