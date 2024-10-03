@@ -1,6 +1,6 @@
 //Class: A class is a better way of generating objects oriented programming(oop)
 
-class Cart {
+export class Cart {
    //cartItems = undefined;
    cartItems;
 
@@ -126,11 +126,11 @@ class Cart {
             deliveryOptionsId
          });
       };
-      saveToLocalStorage();
+      this.saveToLocalStorage();
    }
 };
 
-
+/*
 //1st Object
 const cart = new Cart("cart-oop");
 console.log(cart);
@@ -139,3 +139,4 @@ console.log(cart);
 const busnessCart = new Cart("cart-busness");
 busnessCart.addToCart("82bb68d7-ebc9-476a-989c-c78a40ee5cd9");
 console.log(busnessCart);
+*/

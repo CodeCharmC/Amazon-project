@@ -1,25 +1,37 @@
+import { Cart } from "./cart-class.js";
 export let carts = [];
 
-
-
 export async function loadCartFetch() {
-  const response = await fetch("https://supersimplebackend.dev/cart");
-    
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
-    }
+  try {
+    const response = await fetch("https://supersimplebackend.dev/cart");
+      
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+      }
 
     const text = await response.text(); 
-    console.log(text); 
+    //const productDetails = JSON.parse(text);
 
-    const productDetails = JSON.parse(text); 
+    carts = [];
     
-    carts = productDetails.map((product) => {
+    carts.map((product) => {
       console.log(product); 
       return new Cart(product);
     });
+
+    localStorage.setItem("cart-oop", JSON.stringify(carts));
+    return carts;
+
+  } catch (error) {
+    console.error("Error loading cart:", error);
+    throw error;
+  };
 };
 loadCartFetch();
+
+
+
+/*
 
 export function loadCarts(functionCall) {
   const xhr = new XMLHttpRequest();
@@ -33,3 +45,4 @@ export function loadCarts(functionCall) {
   xhr.open("GET", "https://supersimplebackend.dev/cart");
   xhr.send();
 };
+*/
