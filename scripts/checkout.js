@@ -3,26 +3,23 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { renderCheckoutHeader } from "./checkout/checkoutHeader.js";
 //import { loadProducts } from "../data/products.js";
 import { loadProducts, loadProductsFetch } from "../data/products-from-backend.js";
-import { loadCartFetch, loadCarts } from "../data/cart-from-backends.js";
+import { loadCartFetch } from "../data/cart-from-backends.js";
+
 
 
 
 async function loadPage() {
-
    try {
-      //throw new Error("Something went wrong");
-
       await loadProductsFetch();
-
-      await loadCartFetch();
-
+      await loadCartFetch(); 
       
+      renderOrderSummary();
+      renderPaymentSummary();
+      renderCheckoutHeader();
+
    } catch (error) {
-      console.log(error);
-   };
-   renderOrderSummary();
-   renderPaymentSummary();
-   renderCheckoutHeader();
+      console.error("Error loading page:", error);
+   };   
 };
 loadPage();
 
